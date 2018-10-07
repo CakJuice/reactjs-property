@@ -1,6 +1,9 @@
 import { Component } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
+import Form from 'react-validation/build/form'
+import Input from 'react-validation/build/input'
+import { required, email } from '../utils/validators'
 
 class Login extends Component {
   constructor(props) {
@@ -50,21 +53,21 @@ class Login extends Component {
             <div className="card">
               <div className="card-body">
                 <h3 className="card-title">Login</h3>
-                <form method="POST" onSubmit={this.submitLogin} noValidate>
+                <Form method="POST" onSubmit={this.submitLogin} noValidate>
                   <div className="form-group">
                     <label>Email</label>
-                    <input type="email" className="form-control" value={this.state.email} onChange={this.handleChangeEmail} />
+                    <input type="email" className="form-control" value={this.state.email} onChange={this.handleChangeEmail} validations={[required, email]} />
                   </div>
                   <div className="form-group">
                     <label>Password</label>
-                    <input type="password" className="form-control" value={this.state.password} onChange={this.handleChangePassword} />
+                    <input type="password" className="form-control" value={this.state.password} onChange={this.handleChangePassword} validations={[required]} />
                   </div>
                   <div className="form-group form-check">
                     <input type="checkbox" className="form-check-input" checked={this.state.remember} onChange={this.handleChangeRemember} />
                     <label className="form-check-label"> Remember me</label>
                   </div>
                   <button className="btn btn-primary" type="submit">Login</button>
-                </form>
+                </Form>
               </div>
               <div className="card-footer text-muted text-center">
                 Not registered yet? <Link href="/signup"><a>Sign up</a></Link>
